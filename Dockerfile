@@ -13,8 +13,8 @@ RUN sh -c 'echo "deb http://cran.rstudio.com/bin/linux/ubuntu trusty/" >> /etc/a
         R -e 'install.packages("dplyr", repos="https://cloud.r-project.org/")' && \
         R -e 'install.packages("ggplot2", repos="https://cloud.r-project.org/")'
 
-ADD https://raw.githubusercontent.com/cyverseuk/GWASSER/master/GWASSER.R /data/
+ADD https://raw.githubusercontent.com/cyverseuk/GWASSER/master/GWASSER.R /bin/
 
 WORKDIR /data/
 
-ENTRYPOINT ["Rscript", "GWASSER.R"]
+ENTRYPOINT ["Rscript", "/bin/GWASSER.R"]
