@@ -236,12 +236,21 @@ prepResults <- function(df, start){
 snpAssociation <- function(df, phenotype, covs, start){
 
   fvalues <- prepResults(df, start)
+  pvalues <- prepResults(df, start)
 
   # The basic formular for a linear model should be 'response ~ explanatory variables'.
   baseFormula <- paste0(phenotype, " ~ ")
 
   # The basic modelling function in R is 'lm'
   modelfun <- lm
+
+  getFVals <- function(model){
+      return(anova(model)[1, 4])
+  }
+
+  getPVals <- function(model){
+      return(anova(model)[1, 5])
+  }
 
   # If there are mixed effects to be taken account of, the function lmer needs to
   # be used instead, and the formula adapted.
@@ -253,19 +262,18 @@ snpAssociation <- function(df, phenotype, covs, start){
 
   for(i in names(fvalues)){
     modelFormula <- as.formula(paste0(baseFormula, " + ", i))
-    fred <-
-      try(
-        anova(
-          modelfun(modelFormula, data = df)
-        )[1, 4] # Col was 4 - F value, col 5 is p value.
-      )
-
+    mod <- modelfun(modelFormula, data = df)
+    fred <- try(getFVals(mod))
+    pred <- try(getPVals(mod))
     if(class(fred) != "try-error"){
       fvalues[i] <- fred
     }
+    if(class(pred) != "try-error"){
+      pvalues[i] <- pred
+    }
   }
 
-  return(fvalues)
+  return(list(fvalues, pvalues))
 
 }
 
@@ -319,11 +327,11 @@ if(!interactive()){
 
       message(paste0("Starting association of SNPs for phenotype: ", pheno))
 
-      fvals <- snpAssociation(df = combined$data,
+      results <- snpAssociation(df = combined$data,
                                phenotype = args$pheno,
                                covs = args$covs,
                                start = combined$IDcol + 1)
-      output <- data.frame(ID = names(fvals), fvalues = fvals)
+      output <- data.frame(ID = names(fvals), fvalues = results[[1]], pvalues = results[[2]])
 
       message("Writing full raw output data to file...")
       writeOut(output, file = paste0(args$outdir,
