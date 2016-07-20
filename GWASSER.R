@@ -24,32 +24,25 @@ r["CRAN"] = "http://cran.uk.r-project.org"
 options(repos = r)
 rm(r)
 
+# Installed package list.
 inst <- installed.packages()[, 1]
 
-if(!("lme4" %in% inst)){
-  warning("Detected that lme4 is not installed. - INSTALLING")
-  install.packages("lme4")
-}
+# List of required packages.
+reqs <- c("lme4", "argparse", "dplyr", "ggplot2", "lmerTest")
 
-if(!("argparse" %in% inst)){
-  warning("Detected that argparse is not installed. - INSTALLING")
-  install.packages("argparse")
-}
-
-if(!("dplyr" %in% inst)){
-  warning("Detected that dplyr is not installed - INSTALLING")
-  install.packages("dplyr")
-}
-
-if(!("ggplot2" %in% inst)){
-  warning("Detected that ggplot2 is not installed - INSTALLING")
-  install.packages("ggplot2")
+# Check each required package is installed.
+for(req in reqs){
+    if(!(req %in% inst)){
+        warning(paste0("Detected that ", req, " is not installed. - INSTALLING"))
+        install.packages(req)
+    }
 }
 
 suppressMessages(library(lme4))
 suppressMessages(library(argparse))
 suppressMessages(library(dplyr))
 suppressMessages(library(ggplot2))
+suppressMessages(library(lmerTest))
 
 # Load functions
 
