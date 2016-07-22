@@ -232,6 +232,21 @@ prepResults <- function(df, start){
   return(fvalues)
 }
 
+getFVals <- function(model){
+    return(anova(model)[1, 4])
+}
+
+getPVals <- function(model){
+    UseMethod("getPVals", model)
+}
+
+getPVals.lm <- function(model){
+    return(-log(anova(model)[1, 5]))
+}
+
+getPVals.merModLmerTest <- function(model){
+    return(-log(coef(summary(model))[2, 5]))
+}
 
 snpAssociation <- function(df, phenotype, covs, start){
 
@@ -243,14 +258,6 @@ snpAssociation <- function(df, phenotype, covs, start){
 
   # The basic modelling function in R is 'lm'
   modelfun <- lm
-
-  getFVals <- function(model){
-      return(anova(model)[1, 4])
-  }
-
-  getPVals <- function(model){
-      return(anova(model)[1, 5])
-  }
 
   # If there are mixed effects to be taken account of, the function lmer needs to
   # be used instead, and the formula adapted.
@@ -274,7 +281,6 @@ snpAssociation <- function(df, phenotype, covs, start){
   }
 
   return(list(fvalues, pvalues))
-
 }
 
 
@@ -331,7 +337,7 @@ if(!interactive()){
                                phenotype = args$pheno,
                                covs = args$covs,
                                start = combined$IDcol + 1)
-      output <- data.frame(ID = names(fvals), fvalues = results[[1]], pvalues = results[[2]])
+      output <- data.frame(ID = names(results[[1]]), fvalues = results[[1]], minlogp = results[[2]])
 
       message("Writing full raw output data to file...")
       writeOut(output, file = paste0(args$outdir,
@@ -373,9 +379,9 @@ if(!interactive()){
                  "darkturquoise", "green1", "yellow4", "yellow3",
                  "darkorange4", "brown")
 
-        graphic <- ggplot(plotTab, aes(x = X, y = fvalues, colour = Chr)) +
+        graphic <- ggplot(plotTab, aes(x = X, y = minlogp, colour = Chr)) +
             geom_point() + scale_colour_manual(values = c25) + xlab("SNP") +
-            ylab("F Statistic")
+            ylab("- log(P)")
 
         ggsave(filename = paste0(args$outdir,
                                  paste0("/AssociationPlot-", pheno, ".png")),
