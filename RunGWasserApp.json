@@ -1,0 +1,14 @@
+{
+  "name" : "GWasser",
+  "appId" : "Gwasser-0.0.1",
+  "archive" : true,
+  "inputs": {
+    "gFile" :  "http://de.iplantcollaborative.org/dl/d/7E57AD47-8736-4224-962A-D90E6D3597FA/MAGIC_90k_Genotypes_Numeric.csv",
+    "pFile" : [ "http://de.iplantcollaborative.org/dl/d/CA8027AB-EB84-4E4A-A794-ED02FBC75D75/combinedPhenotypes.phe" ],
+    "mFile" : "http://de.iplantcollaborative.org/dl/d/C8C19B25-3EB7-4B95-A5A4-F67B32992C8A/MAGIC_genetic_map_NIAB_2015.csv"
+  },
+  "parameters" : {
+    "PHENOS": "Awns",
+    "COVS": "Funnel"
+  }
+}

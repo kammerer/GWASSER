@@ -1,0 +1,105 @@
+{
+  "name": "GWasser",
+  "shortDescription": "an R script for simple gwassing",
+  "version": "0.0.1",
+  "deploymentSystem": "data.iplantcollaborative.org",
+  "deploymentPath": "rosysnake/gwasser_temp",
+  "executionSystem": "cyverseUK-Batch2",
+  "executionType": "CLI",
+  "parallelism": "SERIAL",
+  "templatePath": "wrapper.sh",
+  "testPath": "test.sh",
+  "ontology": [ ],
+  "inputs": [
+    {"id": "gFile",
+    "value": {
+      "required": true,
+      "default": ""
+    },
+    "details": { "label": "Genotype File",
+      "showArgument": true,
+      "argument": "--gFile "
+    },
+    "semantics": {
+      "maxCardinality": 1
+    }},
+    {"id": "pFile",
+    "value": {
+      "required": true,
+      "default": ""
+      },
+    "details": { "label": "Phenotype File",
+      "showArgument": true,
+      "argument": "--pFile "
+    },
+    "semantics": {
+      "maxCardinality": 1,
+      "maxCardinality": -1
+      }},
+    {"id": "mFile",
+    "value": {
+      "required": false,
+      "default": ""
+      },
+    "details": { "label": "Map File",
+      "showArgument": true,
+      "argument": "--mFile "
+    },
+    "semantics": {
+      "maxCardinality": 1
+      }}
+    ],
+
+
+  "parameters": [
+    {"id": "PHENOS",
+    "value": {
+      "type": "string",
+      "visible": true,
+      "required": true
+    },
+    "details": {
+      "label" : "Phenotypes to associate with SNPs",
+      "showArgument": true,
+      "argument": "--phenos "
+      }},
+    {"id": "COVS",
+    "value": {
+      "type": "string",
+      "visible": true
+      },
+    "details": {
+      "label": "Phenotypes to include as mixed effects",
+      "showArgument": true,
+      "argument": "--cov "
+      }},
+    {"id": "mkplots",
+      "value": {
+        "type": "flag",
+        "visible": true
+      },
+      "details": {
+        "label": "Skip making manhatten plot.",
+        "showArgument": true,
+        "argument": "--noPlots "
+      },
+      "semantics": {
+        "maxCardinality": 1
+      }
+    },
+    {"id": "saveinter",
+      "value": {
+        "type": "flag",
+        "visible": true
+      },
+      "details": {
+        "label": "Whether ot not to save intermediate files.",
+        "showArgument": true,
+        "argument": "--saveInter "
+      },
+      "semantics": {
+        "maxCardinality": 1
+      }
+    }
+]
+}
