@@ -1,7 +1,11 @@
 {
   "name": "GWasser",
   "shortDescription": "an R script for simple gwassing",
-  "version": "0.0.1",
+  "longDescription": "",
+  "helpURI": "",
+  "datePublished": "",
+  "author":"",
+  "version": "0.0.0",
   "deploymentSystem": "data.iplantcollaborative.org",
   "deploymentPath": "rosysnake/gwasser_temp",
   "executionSystem": "cyverseUK-Batch2",
