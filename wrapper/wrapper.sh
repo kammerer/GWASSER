@@ -7,11 +7,11 @@ MFILE=(${mFile})
 MFILE=${MFILE[@]:1}
 
 ARGS="${gFile} ${pFile} ${mFile} ${PHENOS} ${COVS} --outDir output ${mkplots} ${saveinter}"
-INPUTS=${GFILE}", "${PFILE} ${MFILE}
+INPUTS="${GFILE}", "${PFILE} ${MFILE}"
+echo ${INPUTS}
 
 echo  universe                = docker >> lib/condorSubmitEdit.htc
 echo docker_image            =  cyverseuk/gwasser:v1.0.0 >> lib/condorSubmitEdit.htc ######
-echo executable               =  ./launch.sh >> lib/condorSubmitEdit.htc #####
 echo arguments                          = ${ARGS} >> lib/condorSubmitEdit.htc
 echo transfer_input_files = ${INPUTS} launch.sh >> lib/condorSubmitEdit.htc
 echo transfer_output_files = output >> lib/condorSubmitEdit.htc
@@ -29,4 +29,3 @@ jobid=`echo $jobid | sed -e 's/\.//'`
 condor_tail -f $jobid
 
 exit 0
-
