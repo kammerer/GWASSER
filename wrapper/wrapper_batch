@@ -3,7 +3,7 @@
 rmthis=`ls`
 echo ${rmthis}
 
-docker run -v `pwd`:/data cyverseuk/gwasser:26.07.2016 ${gFile} ${pFile} ${mFile} ${PHENOS} ${COVS} --outDir output ${mkplots} ${saveinter};
+docker run -v `pwd`:/data cyverseuk/gwasser:v1.0.0 ${gFile} ${pFile} ${mFile} ${PHENOS} ${COVS} --outDir output ${mkplots} ${saveinter};
 #######previous tag needs to be update as soon as we download the other image
 
 
