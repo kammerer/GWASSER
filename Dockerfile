@@ -18,6 +18,8 @@ RUN sh -c 'echo "deb http://cran.rstudio.com/bin/linux/ubuntu trusty/" >> /etc/a
 
 ADD https://raw.githubusercontent.com/cyverseuk/GWASSER/master/GWASSER.R /bin/
 
+RUN chmod 777 /bin/GWASSER.R
+
 WORKDIR /data/
 
 ENTRYPOINT ["Rscript", "/bin/GWASSER.R"]
