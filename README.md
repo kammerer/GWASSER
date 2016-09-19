@@ -1,6 +1,6 @@
 # GWASSER
 
-![Docker badge](https://img.shields.io/badge/ImageInfo-_961.2_MB/_12_Layers_-blue.svg?style=flat-square)
+![Docker badge](https://img.shields.io/badge/ImageInfo-_963.3_MB/_12_Layers_-blue.svg?style=flat-square)
 
 **An R script for simple gwassing.**
 
