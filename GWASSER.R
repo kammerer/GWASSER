@@ -113,6 +113,13 @@ processArgs <- function(){
   return(arguments)
 }
 
+if(!interactive()){
+    if(!dir.exists(args$outdir)){
+        message("Output directory is missing, creating directory...")
+        dir.create(args$outdir, recursive = TRUE)
+    }
+}
+
 if(!interactive()) {
   args <- processArgs()
   if (!args$noplots) {
@@ -297,11 +304,6 @@ if(!interactive()){
 
     message("------------------------")
     message("Start Analysis:\n")
-
-    if(!dir.exists(args$outdir)){
-        message("Output directory is missing, creating directory...")
-        dir.create(args$outdir, recursive = TRUE)
-    }
 
     message("Now reading genotype file...")
     genotypes <- parseGeno(args$gfile)
