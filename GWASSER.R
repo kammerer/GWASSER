@@ -113,15 +113,12 @@ processArgs <- function(){
   return(arguments)
 }
 
-if(!interactive()){
-    if(!dir.exists(args$outdir)){
+if(!interactive()) {
+  args <- processArgs()
+  if(!dir.exists(args$outdir)){
         message("Output directory is missing, creating directory...")
         dir.create(args$outdir, recursive = TRUE)
     }
-}
-
-if(!interactive()) {
-  args <- processArgs()
   if (!args$noplots) {
     if (is.null(args$map)) {
       message("\n--mFile required to plot\n")
