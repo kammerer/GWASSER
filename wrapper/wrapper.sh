@@ -1,5 +1,20 @@
 #!/bin/bash
 
+function debug {
+  echo "creating debugging directory"
+mkdir .debug
+for word in ${rmthis}
+  do
+    if [[ "${word}" == *.sh ]] || [[ "${word}" == lib ]]
+      then
+        mv "${word}" .debug;
+      fi
+  done
+}
+
+rmthis=`ls`
+echo ${rmthis}
+
 GFILEU=(${gFile})
 PFILEU=`echo ${pFile} | sed -e 's/ /, /g'`
 PFILEU=(${PFILEU})
@@ -11,7 +26,7 @@ echo arguments are ${CMDLINEARG}
 
 
 echo  universe                = docker >> lib/condorSubmitEdit.htc
-echo docker_image            =  cyverseuk/gwasser:v1.0.0 >> lib/condorSubmitEdit.htc ######
+echo docker_image            =  cyverseuk/gwasser:v1.0.0.1 >> lib/condorSubmitEdit.htc ######
 echo arguments                          = ${CMDLINEARG} >> lib/condorSubmitEdit.htc
 echo transfer_input_files = ${INPUTSU} >> lib/condorSubmitEdit.htc
 echo transfer_output_files = output >> lib/condorSubmitEdit.htc
@@ -27,5 +42,7 @@ jobid=`echo $jobid | sed -e 's/\.//'`
 
 #echo going to monitor job $jobid
 condor_tail -f $jobid
+
+debug
 
 exit 0
