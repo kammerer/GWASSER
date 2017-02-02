@@ -7,13 +7,14 @@
   "author":"Alice Minotto",
   "version": "1.0.0",
   "deploymentSystem": "cyverseUK-Storage2",
-  "deploymentPath": "/mnt/data/rosysnake/GWASSER",
+  "deploymentPath": "/mnt/data/apps/GWASSER",
   "executionSystem": "cyverseUK-Batch2",
   "executionType": "CLI",
   "parallelism": "SERIAL",
   "templatePath": "wrapper.sh",
   "testPath": "test.sh",
   "ontology": [ ],
+  "tags": [ "CyverseUK" ],
   "inputs": [
     {"id": "gFile",
     "value": {
@@ -83,7 +84,7 @@
         "visible": true
       },
       "details": {
-        "label": "Skip making manhatten plot.",
+        "label": "Skip making manhattan plot.",
         "showArgument": true,
         "argument": "--noPlots "
       },
@@ -97,7 +98,7 @@
         "visible": true
       },
       "details": {
-        "label": "Whether ot not to save intermediate files.",
+        "label": "Whether or not to save intermediate files.",
         "showArgument": true,
         "argument": "--saveInter "
       },
