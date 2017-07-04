@@ -204,7 +204,9 @@ mergeGenoPheno <- function(pheno, geno){
   namesNotID <- function(table, before = FALSE){
     cnames <- colnames(table)
     idcol <- which(cnames == "ID")
-    if(before){
+    if (before && idcol == 1) {
+      out <- NULL
+    } else if (before) {
       out <- cnames[1:(idcol - 1)]
     } else {
       out <- cnames[(idcol + 1):ncol(table)]
