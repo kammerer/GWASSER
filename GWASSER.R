@@ -333,7 +333,7 @@ if(!interactive()){
       message(paste0("Starting association of SNPs for phenotype: ", pheno))
 
       results <- snpAssociation(df = combined$data,
-                               phenotype = args$pheno,
+                               phenotype = pheno,
                                covs = args$covs,
                                start = combined$IDcol + 1)
       output <- data.frame(ID = names(results[[1]]), fvalues = results[[1]], minlogp = results[[2]])
