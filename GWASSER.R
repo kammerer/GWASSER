@@ -359,7 +359,8 @@ if(!interactive()){
           warning("The number of rows following merge of map and p values is less. Are some markers not mapped or named inconsistently?")
         }
         if(nrow(plotTab) == 0){
-          error("The number of rows following merge of map and p values is 0. This should not happen.")
+          warning("The number of rows following merge of map and p values is 0. This should not happen.")
+          q("no")
         }
 
         plotTab <- arrange(plotTab, Chr, cM)
